@@ -23,7 +23,7 @@ npm install
 cd app_public
 ```
 5. Para crear las colecciones en la base de datos descomentar el código que se encuentra en cada uno de los archivos de la carpeta "app_api/models" y realizar el paso 6. Posteriormente, se debe comentar este código nuevamente.
-7. Para ejecutar la aplicación realizada en Node.js y la API de REST, ejecutar el comando:
+6. Para ejecutar la aplicación realizada en Node.js y la API de REST, ejecutar el comando:
 ```
 npm start
 ```
@@ -32,7 +32,7 @@ o el comando
 nodemon
 ```
 Las aplicaciones correrán en el puerto 3000 del localhost.
-8. Para correr el sistema de administración de reservas, dentro de la carpeta "app_public" ejecutar el comando:
+7. Para correr el sistema de administración de reservas, dentro de la carpeta "app_public" ejecutar el comando:
 ```
 ng serve
 ```
