@@ -1,0 +1,79 @@
+extends layout
+
+block Content
+  // Wrapper
+  #wrapper.fade-in
+    // Intro
+    #intro
+      h1=h1
+      p=city
+      ul.actions
+        li
+          a.button.icon.solid.solo.fa-arrow-down.scrolly(href='#header') Continue
+    // Header
+    header#header
+      a.logo=company
+    // Nav
+    nav#nav
+      ul.links
+        li(class=(h1 == 'Sea World Hotel' ? "active": undefined))
+          a(href='/inicio') Inicio
+        li(class=(h1 == 'Historia' ? "active": undefined))
+          a(href='/historia') Historia
+        li(class=(h1 == 'Galería' ? "active": undefined))
+          a(href='/galeria') Galeria
+        li(class=(h1 == 'Reservar Ahora' ? "active": undefined))
+          a(href='/BookingAdmin/Reservar') Reserva Ahora
+      ul.icons
+        li
+          a.icon.brands.fa-facebook-f(href='https://www.facebook.com/seaworldhotel.ec' target='_blank')
+            span.label Facebook
+        li
+          a.icon.brands.fa-instagram(href='https://www.instagram.com/seaworldhotel.ec/' target='_blank')
+            span.label Instagram
+        li
+          a.icon.brands.fa-tiktok(href='https://www.tiktok.com/@seaworldhotel.ec' target='_blank')
+            span.label TikTok
+        li
+          a.icon.brands.fa-whatsapp(href='https://wa.me/+593961103332' target='_blank')
+            span.label Whatsapp
+    block Main
+    // Footer
+    footer#footer
+      section
+        h3 Google Maps
+        .mapouter
+          .gmap_canvas
+            iframe#gmap_canvas(width='100%' height='500' src=gmap frameborder='0' scrolling='no' marginheight='0' marginwidth='0')
+            br
+      section.split.contact
+        section.alt
+          h3 Dirección
+          p=address
+        section
+          h3 Teléfono
+          p
+            a(href='tel:+593961103332') (+593) 96 110 3332
+            |  | 
+            a(href='tel:+593993055427') (+593) 99 305 5427
+        section
+          h3 Email
+          p
+            a(href=`mailto:${mail}?Subject=Sea%20World%20Hotel`)=mail
+        section
+          h3 Redes Sociales
+          ul.icons.alt
+            li
+              a.icon.brands.alt.fa-facebook-f(href='https://www.facebook.com/seaworldhotel.ec' target='_blank')
+                span.label Facebook
+            li
+              a.icon.brands.alt.fa-instagram(href='https://www.instagram.com/seaworldhotel.ec/' target='_blank')
+                span.label Instagram
+            li
+              a.icon.brands.alt.fa-tiktok(href='https://www.tiktok.com/@seaworldhotel.ec' target='_blank')
+                span.label TikTok
+            li
+              a.icon.brands.alt.fa-whatsapp(href='https://wa.me/+593961103332' target='_blank')
+                span.label Whatsapp
+        section
+          h3 &copy; #{company} #{year}

@@ -1,0 +1,22 @@
+.form-container{
+    background-image: url('../../../assets/images/bg2.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.aform{
+    width: 80% !important;
+}
+
+@media (min-width: 768px) {
+    .aform{
+        width: 40% !important;
+    }   
+}
+
+@media (min-width: 1200px) {
+    .aform{
+        width: 25% !important;
+    }       
+}

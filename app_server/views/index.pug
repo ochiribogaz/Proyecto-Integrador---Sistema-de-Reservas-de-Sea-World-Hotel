@@ -1,0 +1,67 @@
+extends template1
+
+append StyleSheets
+  link(rel='stylesheet' href='/stylesheets/jquery-google-reviews.css')
+
+block Main
+  // Main
+  #main
+    // Featured Post
+    article.post.featured
+      header.major
+        span.date
+          img#logoSW(src='images/logoSW.webp' alt=company)
+        h2
+          a
+            | Bienvenido al 
+            br
+            | #{company}
+        p
+          | Sea World Hotel se encuentra en las hermosas playas manabitas de San Jacinto en un agradable ambiente de tranquilidad y descanso para ti y los tuyos.
+      .image.main
+        iframe(width='100%' height='500px' src='https://www.youtube.com/embed/-v5VXgJJVjY' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
+      ul.actions.special
+        li
+          a.button.large(href='/historia') Conoce nuestra historia
+      h2.noMgB Nuestras Acomodaciones
+    // Posts
+    section.posts
+      article#service1
+        header
+          h2 Piscina
+        a.image.fit(href='#service1')
+          img(src='images/pic01.webp' alt='Piscina')
+        p
+          | Contamos con hidromasaje, cascada, piscina para ni&ntilde;os y una mesa de billar exclusivamente para tu diversi&oacute;n.
+      article#service2
+        header
+          h2 Habitaciones
+        a.image.fit(href='#service2')
+          img(src='images/pic02.webp' alt='Aire acondicionado, agua caliente, TV por cable y Wifi')
+        p
+          | Las instalaciones del Hotel son nuevas y cuentan con aire acondicionado, agua caliente, TV por cable y Wifi.
+      article#service3
+        header
+          h2 Sal&oacute;n de Eventos
+        a.image.fit(href='#service3')
+          img(src='images/pic03.webp' alt='Salón de Eventos')
+        p
+          | Contamos con un sal&oacute;n de eventos en el &uacute;ltimo piso del hotel, para que celebres junto a tu familia y amigos.
+      article#service4
+        header
+          h2 Ubicaci&oacute;n
+        a.image.fit(href='#service4')
+          img(src='images/pic04.webp' alt='Parqueadero')
+        p
+          | Estamos ubicados a dos cuadras del mar. Además, disponemos de parqueadero para tu auto.
+    section
+      article
+        header#customerOpinion
+          h2
+            | ¿Qué opinan nuestros clientes?
+        #google-reviews
+
+append Scripts
+  script(src='https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDXL3PwHKSFDsAWFJ9zuLvq9HmzsBuYEjM')
+  script(src='/javascripts/jquery-google-reviews.js')
+  script(src='/javascripts/google-reviews.js')

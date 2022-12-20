@@ -1,0 +1,51 @@
+<h2 class="dashboard-title">{{actionTitle}} Habitaciones</h2>
+<div class="card">
+    <div class="card-body">
+        <form class="w-100" novalidate [formGroup]="roomForm" (ngSubmit)="handleRoom()">
+            <div class="row w-100 mx-0 mb-sm-3">
+                <div class="col-sm mb-3 mb-sm-0">
+                    <div>
+                        <label for="customerid" class="form-label">Número de Habitación 
+                            <span *ngIf="roomForm.get('roomNumber')?.hasError('required') && roomForm.get('roomNumber')?.touched" class="ba-error">* Campo número requerido</span>
+                        </label>
+                        <input formControlName="roomNumber" type="number" class="form-control" id="roomNumber" name="roomNumber" placeholder="Número de Habitación">
+                    </div>
+                </div>
+                <div class="col-sm mb-3 mb-sm-0">
+                    <div>
+                        <label for="category" class="form-label">Piso 
+                            <span *ngIf="roomForm.get('floor')?.hasError('required') && roomForm.get('floor')?.touched" class="ba-error">* Campo piso requerido</span>
+                        </label>
+                        <select formControlName="floor" type="text" class="form-control" id="floor" name="floor">
+                            <option value="" disabled>Seleccione el piso de la Habitación</option>
+                            <option value="Planta Baja">Planta Baja</option>
+                            <option value="Primer Piso">Primer Piso</option>
+                            <option value="Segundo Piso">Segundo Piso</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm mb-3 mb-sm-0">
+                    <div>
+                        <label for="size" class="form-label">Tipo de Habitación 
+                            <span *ngIf="roomForm.get('roomType')?.hasError('required') && roomForm.get('roomType')?.touched" class="ba-error">* Campo requerido</span>
+                        </label>
+                        <select formControlName="roomType" type="text" class="form-control" id="roomType" name="roomType">
+                            <option value="" disabled>Seleccione el tipo de la Habitación</option>
+                            <option *ngFor="let rType of roomTypes" value="{{rType._id}}">{{rType.roomSize}} {{rType.roomCategory}} Capacidad: {{rType.capacity}} pers.</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row w-100 mx-0">
+                <div class="col-sm mb-3 mb-sm-0 d-flex justify-content-center justify-content-sm-end">
+                    <button>Guardar</button>
+                </div>
+                <div class="col-sm mb-3 mb-sm-0 d-flex justify-content-center justify-content-sm-start">
+                    <a class="button button-invert" routerLink="/Dashboard/Resumen">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+  </div>

@@ -1,0 +1,108 @@
+<form novalidate [formGroup]="customerForm" (ngSubmit)="handleBooking()" class="row w-100">
+    <div class="col-sm mb-3 mb-sm-0">
+        <h2>Tus datos</h2>
+        <div class="w-100">
+            <div class="row w-100 mx-0 mb-sm-3">
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="customerId" class="form-label">Cédula 
+                        <span *ngIf="customerForm.get('customerId')?.hasError('required') && customerForm.get('customerId')?.touched; else elseCustomerId" class="ba-error">* Campo cédula requerido</span>
+                        <ng-template #elseCustomerId>
+                            <span *ngIf="(customerForm.get('customerId')?.hasError('required') || customerForm.get('max')?.hasError('min')) && customerForm.get('customerId')?.touched" class="ba-error">* Cédula inválida</span>
+                        </ng-template>
+                    </label>
+                    <input formControlName="customerId" required type="number" class="form-control" id="customerId" name="customerId" placeholder="Cédula del cliente">
+                </div>
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="name" class="form-label">Nombre <span *ngIf="customerForm.get('name')?.hasError('required') && customerForm.get('name')?.touched" class="ba-error">* Campo nombre requerido</span></label>
+                    <input formControlName="name" required type="text" class="form-control" id="name" name="name"  placeholder="Nombre del cliente">
+                </div>
+            </div>
+            <div class="row w-100 mx-0 mb-sm-3">
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="lastname" class="form-label">Apellido <span *ngIf="customerForm.get('lastname')?.hasError('required') && customerForm.get('lastname')?.touched" class="ba-error">* Campo apellido requerido</span></label>
+                    <input formControlName="lastname" required type="text" class="form-control" id="lastname" name="lastname" placeholder="Apellido del cliente">
+                </div>
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="email" class="form-label">Email 
+                        <span *ngIf="customerForm.get('email')?.hasError('required') && customerForm.get('email')?.touched; else elseEmail" class="ba-error">* Campo email requerido</span>
+                        <ng-template #elseEmail><span *ngIf="customerForm.get('email')?.hasError('email') && customerForm.get('email')?.touched" class="ba-error">* Email no válido</span>
+                        </ng-template>
+                    </label>
+                    <input formControlName="email" type="text" class="form-control" id="email" name="email"  placeholder="Email del cliente">
+                </div>
+            </div>
+            <div class="row w-100 mx-0 mb-sm-3">
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="phone" class="form-label">Teléfono <span *ngIf="customerForm.get('phone')?.hasError('required') && customerForm.get('phone')?.touched" class="ba-error">* Ingrese una teléfono válido</span></label>
+                    <input formControlName="phone" required type="tel" class="form-control" id="phone" name="phone" placeholder="Teléfono del cliente">
+                </div>
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="province" class="form-label">Provincia <span *ngIf="customerForm.get('province')?.hasError('required') && customerForm.get('province')?.touched" class="ba-error">* Campo provincia requerido</span></label>
+                    <select formControlName="province" type="text" class="form-control" id="province" name="province" placeholder="Provincia del cliente">
+                        <option disabled>Seleccione su provincia</option>
+                        <option value='Azuay'>Azuay</option>
+                        <option value='Bolívar'>Bolívar</option>
+                        <option value='Cañar'>Cañar</option>
+                        <option value='Carchi'>Carchi</option>
+                        <option value='Chimborazo'>Chimborazo</option>
+                        <option value='Cotopaxi'>Cotopaxi</option>
+                        <option value='El Oro'>El Oro</option>
+                        <option value='Esmeraldas'>Esmeraldas</option>
+                        <option value='Galápagos'>Galápagos</option>
+                        <option value='Guayas'>Guayas</option>
+                        <option value='Imbabura'>Imbabura</option>
+                        <option value='Loja'>Loja</option>
+                        <option value='Los Ríos'>Los Ríos</option>
+                        <option value='Manabí'>Manabí</option>
+                        <option value='Morona Santiago'>Morona Santiago</option>
+                        <option value='Napo'>Napo</option>
+                        <option value='Orellana'>Orellana</option>
+                        <option value='Pastaza'>Pastaza</option>
+                        <option value='Pichincha'>Pichincha</option>
+                        <option value='SantaElena'>SantaElena</option>
+                        <option value='Santo Domingo'>Santo Domingo</option>
+                        <option value='Sucumbíos'>Sucumbíos</option>
+                        <option value='Tungurahua'>Tungurahua</option>
+                        <option value='Zamora Chinchipe'>Zamora Chinchipe</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row w-100 mx-0 mb-sm-3">
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="address" class="form-label">Dirección <span *ngIf="customerForm.get('address')?.hasError('required') && customerForm.get('address')?.touched" class="ba-error">* Campo dirección requerido</span></label>
+                    <input formControlName="address" required type="text" class="form-control" id="address" name="address" placeholder="Dirección del cliente">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm mb-3 mb-sm-0 d-flex justify-content-center align-items-center">
+        <div class="card p-0 m-3" style="width: 22rem;">
+            <div class="card-body">
+                <h5 class="card-title">Resumen de la Reserva</h5>
+                <hr class="my-2 main-hr">
+                <h6 class="text-muted">Check In: {{savedDates[0]}}</h6>
+                <h6 class="text-muted">Check Out: {{savedDates[1]}}</h6>
+                <hr class="my-2 main-hr">
+                <div *ngFor="let room of rooms; let i=index">
+                    <div class="d-flex row">
+                        <label class="col my-0 text-muted">Habitación<br>{{roomTypes[i].roomSize}} {{roomTypes[i].roomCategory}}</label>
+                        <p class="col-5 my-0">{{subTotals[i] | currency}}</p>
+                    </div>
+                    <span><strong>Adultos: </strong>{{room.numAdults}} <strong>Niños:</strong> {{room.numChildren}}</span>
+                    <hr>
+                </div>
+                <div class="d-flex mb-3 row">
+                    <h6 class="col my-0 text-muted">Total</h6>
+                    <h6 class="col-5 my-0">{{total | currency}}</h6>
+                </div>
+                <div class="w-100 mb-3 d-flex justify-content-center">
+                    <button type="submit" class="button">Pagar</button>
+                </div>
+                <div class="w-100 d-flex justify-content-center">
+                    <a (click)="cancelBooking()" class="button button-invert">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

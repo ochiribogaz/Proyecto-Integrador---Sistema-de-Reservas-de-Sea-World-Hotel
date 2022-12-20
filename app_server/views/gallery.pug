@@ -1,0 +1,55 @@
+extends template2
+
+append StyleSheets
+  link(href='https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/css/nanogallery2.min.css' rel='stylesheet' type='text/css')
+
+block Main
+  // Main
+  #main
+    section.post
+      header.major
+        span.date
+          img#logoSW(src='../images/logoSW.webp' alt='Sea World Hotel')
+        h1 Galer&iacute;a de fotos
+        p Disfruta de nuestras fotos
+      div(id='Sea World Hotel' data-nanogallery2='{\
+      "flickrAPIKey": "86b9e1712a37cc6efabfb7911d6ea01a",\
+      "userID": "195084427@N06",\
+      "kind": "flickr",\
+      "photoset": "72177720296858835",\
+      "thumbnailOpenOriginal": false,\
+      "thumbnailWidth": "200",\
+      "thumbnailHeight": "auto",\
+      "thumbnailBorderVertical": 0,\
+      "thumbnailBorderHorizontal": 0,\
+      "colorScheme": {\
+      "thumbnail": {\
+      "background": "rgba(255,255,255,1)"\
+      }\
+      },\
+      "thumbnailDisplayTransitionDuration": 500,\
+      "thumbnailLabel": {\
+      "position": "overImageOnBottom",\
+      "display": false\
+      },\
+      "thumbnailHoverEffect2": "imageScaleIn80",\
+      "thumbnailAlignment": "center",\
+      "thumbnailLevelUp": true,\
+      "thumbnailOpenImage": true,\
+      "viewerToolbar":{\
+      "display":    true,\
+      "standard":   "label",\
+      "minimized":  "label"\
+      },\
+      "viewerTools":{\
+      "topLeft":    "pageCounter",\
+      "topRight":   "playPauseButton, zoomButton, shareButton, closeButton"\
+      }\
+      }')
+        style.
+          .pageCounter{
+          font-family: "Open Sans" !important;
+          }
+
+append Scripts
+  script(type='text/javascript' src='https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/jquery.nanogallery2.min.js')

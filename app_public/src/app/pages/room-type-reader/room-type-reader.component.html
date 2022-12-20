@@ -1,0 +1,31 @@
+<h2 class="dashboard-title">Tipos de Habitaciones</h2>
+<div class="card">
+    <div class="card-body">
+        <table id="roomType-table" datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="dataTable nowrap table display w-100 table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Categoría</th>
+                    <th>Tamaño</th>
+                    <th>Precio</th>
+                    <th>Capacidad</th>
+                    <th>Características</th>
+                    <th>Edit</th>
+                    <th>Del</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let rm of roomTypes">
+                    <td>{{rm._id}}</td>
+                    <td>{{rm.roomCategory}}</td>
+                    <td>{{rm.roomSize}}</td>
+                    <td>{{rm.price | number: '1.2-2'}}</td>
+                    <td>{{rm.capacity}}</td>
+                    <td>{{rm.amenities}}</td>
+                    <td><a routerLink='/Dashboard/ActualizarHTipos/{{rm._id}}'><i class="bi bi-pen-fill"></i></a></td>
+                    <td><a (click)="deleteRType(rm._id)"><i class="bi bi-trash3-fill"></i></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

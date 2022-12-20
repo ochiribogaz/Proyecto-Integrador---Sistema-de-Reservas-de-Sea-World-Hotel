@@ -1,0 +1,19 @@
+.mongoChart{
+    border: none;
+    border-radius: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.chartContainer{
+    width: 97%;
+}
+
+.chartHeight{
+    height: 315px;
+    width: 95%;
+}
+
+.smallChartHeight{
+    height: 150px;
+}

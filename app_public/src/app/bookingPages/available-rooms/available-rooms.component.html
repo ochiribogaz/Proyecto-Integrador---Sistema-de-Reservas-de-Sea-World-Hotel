@@ -1,0 +1,39 @@
+<div class="w-100 d-flex justify-content-center">
+    <div class="w-50 d-flex flex-column align-items-center justify-content-center">
+        <h2 class="text-center">¿Cuándo te gustaría venir?</h2>
+        <form novalidate [formGroup]="datesForm" (ngSubmit)="handleDates()" class="w-100">
+            <div class="row w-100 mx-0 mb-sm-3">
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="checkIn" class="form-label">Check In</label>
+                    <input (change)="onCheckInChange($event)" type="date" class="form-control" id="checkIn" name="checkIn" formControlName="checkIn" placeholder="Check In de la Reserva">
+                </div>
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="checkOut" class="form-label">Check Out</label>
+                    <input (change)="onCheckOutChange($event)" type="date" class="form-control" id="checkOut" name="checkOut" formControlName="checkOut" placeholder="Check Out de la Reserva">
+                </div>
+            </div>
+            <div class="row w-100 mx-0 mb-sm-3">
+                <div class="col-sm mb-3 mb-sm-0 d-flex justify-content-center justify-content-sm-end">
+                    <button type="submit">Buscar</button>
+                </div>
+                <div class="col-sm mb-3 mb-sm-0 d-flex justify-content-center justify-content-sm-start">
+                    <a (click)="goToPayment()" class="button">Reservar Ahora</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row w-100 w-100 mx-0 mb-sm-3 d-flex justify-content-center">
+    <div *ngFor="let rt of roomTypes" class="card p-0 m-3" style="width: 18rem;">
+        <img src="{{rt.imageUrl}}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Habitación {{rt.roomSize}} {{rt.roomCategory}}</h5>
+            <p class="card-text">Precio: {{rt.price | currency}} por persona</p>
+            <div class="w-100 d-flex justify-content-center">
+                <a routerLink="/Habitacion/{{rt.rooms?rt.rooms[0]:''}}" class="button">Más información</a>
+            </div>
+        </div>
+    </div>
+
+</div>

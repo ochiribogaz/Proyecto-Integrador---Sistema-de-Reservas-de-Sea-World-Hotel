@@ -1,0 +1,40 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, user-scalable=no')
+  meta(property='og:site_name' content='Sea World Hotel')
+  meta(name='google-site-verification' content='RDu0ELVNYewNU8N86Fwai-fNC6aaSxaLJ6O8m9GM0Ic')
+  meta(property='og:type' content='business.business')
+  link(rel='icon' type='image/x-icon' href='images/logoSW.webp')
+  title=title
+  link(rel='canonical' href=canonical)
+  meta(name='description' content=description)
+  meta(property='og:title' content=ogTitle)
+  meta(property='og:url' content=ogUrl)
+  meta(property='og:description' content=description)
+  meta(property='og:image' content=ogImage)
+  block StyleSheets
+    link(rel='stylesheet' href='/stylesheets/style.css')
+    noscript
+      link(rel='stylesheet' href='assets/css/noscript.css')
+body.is-preload
+  block Content
+  block Scripts
+    // Scripts
+    script(type='text/javascript' src='https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js')
+    script(src='/javascripts/jquery.scrollex.min.js')
+    script(src='/javascripts/jquery.scrolly.min.js')
+    script(src='/javascripts/browser.min.js')
+    script(src='/javascripts/breakpoints.min.js')
+    script(src='/javascripts/util.js')
+    script(src='/javascripts/main.js')
+    // Hotjar Tracking Code for https://seaworld-hotel.com/
+    script.
+      (function(h,o,t,j,a,r){
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:3112840,hjsv:6};
+      a=o.getElementsByTagName('head')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');

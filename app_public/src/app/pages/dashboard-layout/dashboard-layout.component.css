@@ -1,0 +1,23 @@
+#dashboard-container{
+    height: 100% !important;
+}
+
+a{
+    color: inherit;
+    text-decoration: none;
+}
+
+.dashboard-btn{
+    box-shadow: none;
+}
+
+.dashboard-btn:focus{
+    border-style: none;
+}
+
+#second-container{
+    background-image: url('../../../assets/images/bg.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}

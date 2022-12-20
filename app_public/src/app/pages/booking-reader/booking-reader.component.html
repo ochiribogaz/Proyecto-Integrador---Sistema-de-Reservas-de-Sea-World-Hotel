@@ -1,0 +1,37 @@
+<h2 class="dashboard-title">Reservas</h2>
+<div class="card mb-3">
+    <div class="card-body">
+        <table datatable [dtOptions]="dtOptions"[dtTrigger]="dtTrigger" id="booking-table" class="dataTable table display w-100 table-striped">
+            <thead>
+                <tr>
+                    <th>Check In</th>
+                    <th>Check Out</th>
+                    <th>Cliente</th>
+                    <th>Estado</th>
+                    <th>Tipo</th>
+                    <th>Habitaciones</th>
+                    <th>M. pago</th>
+                    <th>Descuento</th>
+                    <th>Total</th>
+                    <th>Edit</th>
+                    <th>Del</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let booking of bookings">
+                    <td>{{booking.checkIn}}</td>
+                    <td>{{booking.checkOut}}</td>
+                    <td>{{booking.customer}}</td>
+                    <td>{{booking.state}}</td>
+                    <td>{{booking.type}}</td>
+                    <td>{{booking.roomList}}</td>
+                    <td>{{booking.paymentMethod}}</td>
+                    <td>{{booking.discountPercentage | percent: '1.2-2'}}</td>
+                    <td>{{booking.totalPrice | currency}}</td>
+                    <td><a routerLink='/Dashboard/ActualizarReservas/{{booking._id}}'><i class="bi bi-pen-fill"></i></a></td>
+                    <td><a (click)="deleteBooking(booking._id?booking._id:'')"><i class="bi bi-trash3-fill"></i></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

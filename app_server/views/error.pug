@@ -1,0 +1,12 @@
+extends template2
+
+block Main
+  // Main
+  #main
+    section.post
+      header.major
+        span.date
+          img#logoSW(src='../images/logoSW.webp' alt='Sea World Hotel')
+        h1=error.status
+        p=message
+        pre #{error.stack}

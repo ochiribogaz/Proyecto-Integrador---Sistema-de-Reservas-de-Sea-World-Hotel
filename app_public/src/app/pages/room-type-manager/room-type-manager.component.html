@@ -1,0 +1,83 @@
+<h2 class="dashboard-title">{{actionTitle}} Tipos de Habitación</h2>
+<div class="card">
+    <div class="card-body">
+        <form class="w-100" novalidate [formGroup]="roomTypeForm" (ngSubmit)="handleRoomType()">
+            <div class="row w-100 mx-0 mb-sm-3">
+                <div class="col-sm mb-3 mb-sm-0">
+                    <div>
+                        <label for="category" class="form-label">Categoría 
+                            <span *ngIf="roomTypeForm.get('roomCategory')?.hasError('required') && roomTypeForm.get('roomCategory')?.touched" class="ba-error">* Campo categoría requerido</span>
+                        </label>
+                        <select formControlName="roomCategory" type="text" class="form-control" id="category">
+                            <option value="" disabled>Seleccione la categoría de la Habitación</option>
+                            <option value="Estándar">Estándar</option>
+                            <option value="Lujo">Lujo</option>
+                            <option value="Superior">Superior</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm mb-3 mb-sm-0">
+                    <div>
+                        <label for="size" class="form-label">Tamaño 
+                            <span *ngIf="roomTypeForm.get('roomSize')?.hasError('required') && roomTypeForm.get('roomSize')?.touched" class="ba-error">* Campo categoría requerido</span>
+                        </label>
+                        <select formControlName="roomSize" type="text" class="form-control" id="size">
+                            <option value="" disabled>Seleccione el tamaño de la Habitación</option>
+                            <option value="Matrimonial">Matrimonial</option>
+                            <option value="Triple">Triple</option>
+                            <option value="Cuádruple">Cuádruple</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row w-100 mx-0 mb-sm-3">
+                <div class="col-sm mb-3 mb-sm-0">
+                    <div id="am-container">
+                        <label for="amenities" class="form-label">Características 
+                            <span *ngIf="roomTypeForm.get('amenities')?.hasError('required') && roomTypeForm.get('amenities')?.touched" class="ba-error">* Campo características requerido</span>
+                        </label>
+                        <div id="am-select" class="w-100">
+                            <select required type="text" class="form-control" id="amenities" name="amenities" multiple [(ngModel)]="selectedAmenities" [ngModelOptions]="{standalone: true}" style="max-width: 100%">
+                                <option *ngFor="let amenity of roomAmenities" [ngValue]="amenity">{{amenity}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row w-100 mx-0 mb-sm-3">
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="imageUrl" class="form-label">Url de la imagen
+                        <span *ngIf="roomTypeForm.get('imageUrl')?.hasError('required') && roomTypeForm.get('imageUrl')?.touched" class="ba-error">* Campo url de la imagen requerido</span>
+                    </label>
+                    <input formControlName="imageUrl"  type="text" class="form-control" id="imageUrl" placeholder="Url de la imagen de la Habitación">
+                </div>
+            </div>
+
+            <div class="row w-100 mx-0 mb-sm-3">
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="capacity" class="form-label">Capacidad Máxima 
+                        <span *ngIf="roomTypeForm.get('capacity')?.hasError('required') && roomTypeForm.get('capacity')?.touched" class="ba-error">* Campo categoría requerido</span>
+                    </label>
+                    <input formControlName="capacity"  type="number" class="form-control" id="capacity" placeholder="Capacidad de la Habitación">
+                </div>
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="price" class="form-label">Precio 
+                        <span *ngIf="roomTypeForm.get('price')?.hasError('required') && roomTypeForm.get('price')?.touched" class="ba-error">* Campo precio requerido</span>
+                    </label>
+                    <input formControlName="price"  type="number" class="form-control" id="price" placeholder="Precio de la Habitación">
+                </div>
+            </div>
+
+            <div class="row w-100 mx-0">
+                <div class="col-sm mb-3 mb-sm-0 d-flex justify-content-center justify-content-sm-end">
+                    <button type="submit">Guardar</button>
+                </div>
+                <div class="col-sm mb-3 mb-sm-0 d-flex justify-content-center justify-content-sm-start">
+                    <a class="button button-invert" routerLink="/Dashboard/Resumen">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+  </div>

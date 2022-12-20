@@ -1,0 +1,33 @@
+<h2 class="dashboard-title">Clientes</h2>
+<div class="card mb-3">
+    <div class="card-body">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"   id="customer-table" class="dataTable nowrap table display w-100 table-striped">
+            <thead>
+                <tr>
+                    <th>Cédula</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Dirección</th>
+                    <th>Provincia</th>
+                    <th>Edit</th>
+                    <th>Del</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let customer of customers" >
+                    <td>{{customer.customerId}}</td>
+                    <td>{{customer.name}}</td>
+                    <td>{{customer.lastname}}</td>
+                    <td>{{customer.phone}}</td>
+                    <td>{{customer.email}}</td>
+                    <td>{{customer.address}}</td>
+                    <td>{{customer.province}}</td>
+                    <td><a routerLink='/Dashboard/ActualizarClientes/{{customer._id}}'><i class="bi bi-pen-fill"></i></a></td>
+                    <td><a (click)="deleteCustomer(customer._id)"><i class="bi bi-trash3-fill"></i></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

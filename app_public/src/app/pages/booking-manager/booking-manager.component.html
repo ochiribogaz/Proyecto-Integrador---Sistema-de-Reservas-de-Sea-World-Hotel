@@ -1,0 +1,124 @@
+<h2 class="dashboard-title">{{actionTitle}} Reservas</h2>
+<div class="card">
+    <div class="card-body">
+        <form novalidate [formGroup]="bookingForm" (ngSubmit)="handleBooking()" class="w-100">
+            <div class="row w-100 mx-0 mb-sm-3">
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="customerid" class="form-label">Cliente <span *ngIf="bookingForm.get('customer')?.hasError('required') && bookingForm.get('customer')?.touched" class="ba-error">* Campo Cliente Requerido</span></label>
+                    <div id="ci-container">
+                        <select [(ngModel)]="customer" [ngModelOptions]="{standalone: true}" type="number" class="form-control" id="customerid">
+                            <option *ngFor="let customer of customers" value="{{customer.customerId}}">{{customer.customerId}} - {{customer.name}} {{customer.lastname}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row w-100 mx-0 mb-sm-3">
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="checkIn" class="form-label">Check In <span *ngIf="bookingForm.get('checkIn')?.hasError('required') && bookingForm.get('checkIn')?.touched" class="ba-error">* Campo Check In Requerido</span></label>
+                    <input formControlName="checkIn" type="date" class="form-control" id="checkIn" min="{{isUpdate?'':ciValue}}" (change)="onCheckInChange($event)" placeholder="Check In de la Reserva">
+                </div>
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="checkOut" class="form-label">Check Out <span *ngIf="bookingForm.get('checkOut')?.hasError('required') && bookingForm.get('checkOut')?.touched" class="ba-error">* Campo Check Out Requerido</span></label>
+                    <input formControlName="checkOut" type="date" class="form-control" id="checkOut" (change)="onCheckOutChange($event)" placeholder="Check Out de la Reserva">
+                </div>
+            </div>
+            <div class="row w-100 mx-0 mb-sm-3">
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="state" class="form-label">Estado <span *ngIf="bookingForm.get('state')?.hasError('required') && bookingForm.get('state')?.touched" class="ba-error">* Campo Estado Requerido</span></label>
+                    <select formControlName="state" class="form-control" id="state">
+                        <option value="" disabled>Seleccione el estado de la reserva</option>
+                        <option value="En progreso">En progreso</option>
+                        <option value="Completada">Completada</option>
+                        <option value="Cancelada">Cancelada</option>
+                    </select>
+                </div>
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="state" class="form-label">Tipo <span *ngIf="bookingForm.get('type')?.hasError('required') && bookingForm.get('type')?.touched" class="ba-error">* Campo Tipo Requerido</span></label>
+                    <select formControlName="type" class="form-control" id="type">
+                        <option value="" disabled>Seleccione el tipo de la reserva</option>
+                        <option value="En línea">En línea</option>
+                        <option value="Presencial">Presencial</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row w-100 mx-0 mb-sm-3">
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="rooms" class="form-label">Habitaciones <span *ngIf="bookingForm.get('rooms')?.hasError('required') && bookingForm.get('rooms')?.touched" class="ba-error">* Seleccione al menos 1 habitación</span></label>
+                    <select formControlName="rooms" class="form-select" id="rooms" name="rooms" multiple required>
+                        <ng-container *ngFor="let rm of completeRoomInfo">
+                            <option *ngIf="!oRoomsNumbers.has(rm.roomInfo.roomNumber) || availableUpdateRooms.includes(rm.roomInfo.roomNumber)" (click)="onOptionClick(rm)" [ngValue]="rm">Habitación {{rm.roomInfo.roomNumber}} (Precio: {{rm.roomInfo.roomType[0].price | currency}} Tipo: {{rm.roomInfo.roomType[0].roomCategory}} {{rm.roomInfo.roomType[0].roomSize}} Capacidad: {{rm.roomInfo.roomType[0].capacity}})</option>
+                        </ng-container>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row w-100 mx-0 mb-sm-3">
+                <div class="col-sm mb-3 mb-sm-0">
+                    <div class="card mb-3 roomCard" *ngFor="let rm of bookingForm.value['rooms']">
+                        <div class="card-body">
+                            <label class="form-label">Habitación {{rm.roomInfo.roomNumber}}</label>
+                            <label class="card-subtitle mb-2 text-muted form-label">Precio: {{rm.roomInfo.roomType[0].price | currency}} Capacidad: {{rm.roomInfo.roomType[0].capacity}} personas Tipo: {{rm.roomInfo.roomType[0].roomCategory}} {{rm.roomInfo.roomType[0].roomSize}}</label>
+                            <div class="row w-100 mx-0 mb-sm-3">
+                                <div class="col-sm mb-3 mb-sm-0">
+                                    <label for="customerId" class="form-label">Adultos</label>
+                                    <input  required type="number" class="form-control" name="numAdults" (change)="subtotalPricePerRoom(rm)" [(ngModel)]="rm.bookingRoom.numAdults" [ngModelOptions]="{standalone: true}" min="0" [max]="rm.roomInfo.roomType[0].capacity - rm.bookingRoom.numChildren" placeholder="Cantidad de adultos" required>
+                                </div>
+                                <div class="col-sm mb-3 mb-sm-0">
+                                    <label for="name" class="form-label">Niños</label>
+                                    <input required type="number" class="form-control" name="numChildren" (change)="subtotalPricePerRoom(rm)" [(ngModel)]="rm.bookingRoom.numChildren" [ngModelOptions]="{standalone: true}" min="0" [max]="rm.roomInfo.roomType[0].capacity - rm.bookingRoom.numAdults" placeholder="Cantidad de niños" required>
+                                </div>
+                                <div class="col-sm mb-3 mb-sm-0">
+                                    <label for="name" class="form-label">Subtotal</label>
+                                    <input disabled type="number" class="form-control" name="subtotal"  [(ngModel)]="rm.subtotal" [ngModelOptions]="{standalone: true}" placeholder="Subtotal por habitación">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row w-100 mx-0 mb-sm-3">
+                <div class="col-sm mb-3 mb-sm-0">
+                    <div>
+                        <label for="payment-method" class="form-label">Método de Pago <span *ngIf="bookingForm.get('paymentMethod')?.hasError('required') && bookingForm.get('paymentMethod')?.touched" class="ba-error">* Campo Método de Pago Requerido</span></label>
+                        <select formControlName="paymentMethod" type="text" class="form-control" id="payment-method">
+                            <option value="" disabled>Seleccione el  método de pago</option>
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Payphone">Payphone</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm mb-3 mb-sm-0">
+                    <div>
+                        <label for="discountPercentage" class="form-label">Descuento (%) 
+                            <span *ngIf="bookingForm.get('discountPercentage')?.hasError('required') && bookingForm.get('discountPercentage')?.touched; else elseMinMax" class="ba-error">* Campo descuento requerido</span>
+                            <ng-template #elseMinMax>
+                                <span *ngIf="(bookingForm.get('discountPercentage')?.hasError('max') || bookingForm.get('discountPercentage')?.hasError('min')) && bookingForm.get('discountPercentage')?.touched" class="ba-error">* Elija un valor entre 1 y 100</span>
+                            </ng-template>
+                        </label>
+                        <input [min]="0" [max]="100" formControlName="discountPercentage" type="number" class="form-control" id="discountPercentage" placeholder="Porcentaje de descuento" (change)="totalBookingPrice()" required>
+                    </div>
+                </div>
+
+                <div class="col-sm mb-3 mb-sm-0">
+                    <div>
+                        <label for="discount" class="form-label">Precio Total</label>
+                        <input  formControlName="totalPrice" type="number" class="form-control" id="totalPrice" name="totalPrice" placeholder="Total a pagar">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row w-100 mx-0">
+                <div class="col-sm mb-3 mb-sm-0 d-flex justify-content-center justify-content-sm-end">
+                    <button>Guardar</button>
+                </div>
+                <div class="col-sm mb-3 mb-sm-0 d-flex justify-content-center justify-content-sm-start">
+                    <a class="button button-invert" routerLink="/Dashboard/Resumen">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+  </div>

@@ -1,0 +1,193 @@
+<nav class="navbar navbar-light bg-light shadow sticky-top">
+    <div class="container-fluid">
+        <h1 class="m-0">
+            <a class="navbar-brand p-0 m-0 d-flex align-items-center" href="#">
+                <img src="../../../assets/images/logoSW.webp" alt="" width="50" height="50" class="d-inline-block m-2 my-0">
+                <p class="m-0 d-none d-sm-block">Sea World Hotel</p>
+            </a>
+        </h1>
+
+        <form class="m-0  w-50 h-100 d-none d-lg-block">
+            <input autocomplete="off" class="form-control" type="search" placeholder="Buscar" aria-label="Search" list="availableRoutes">
+            <datalist id="availableRoutes">
+              <option *ngFor="let aroute of availableRoutes"><a routerLink="MiPerfil">{{formatRoute(aroute)}}</a></option>
+            </datalist>
+        </form>
+
+        <div class="dropdown d-none d-lg-block">
+            <button id="user-btn" class="btn dropdown-toggle d-flex align-items-center p-0 dashboard-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="d-flex flex-column align-items-start">
+                    <p class="m-0">{{currentUser?.name}} {{currentUser?.lastname}}</p>
+                    <small class="text-muted">{{lastAccess}}</small>
+                </div>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="user-btn">
+                <a class="dropdown-item" href="#"><i class="bi bi-person-fill"></i> Mi Perfil</a>
+                <a class="dropdown-item" (click)="doLogout()"><i class="bi bi-door-open-fill"></i> Cerrar Sesión</a>
+            </ul>
+        </div>
+
+        <button id='burger-menu' class="btn dashboard-btn d-block d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-menu" aria-controls="offcanvas-menu">
+            <h2><a><i class="bi bi-list"></i></a></h2>
+          </button>
+          
+          <div class="offcanvas offcanvas-end d-block d-lg-none w-100" tabindex="-1" id="offcanvas-menu" aria-labelledby="offcanvas-menu-label">
+            <div class="offcanvas-header">
+              <h3 class="offcanvas-title" id="offcanvas-menu-label">Sea World Hotel</h3>
+              <button type="button" class="dashboard-btn btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+
+                <div class="mt-4">
+                    <h5 class="mx-3 mb-1"><i class="bi bi-speedometer"></i> Dashboard</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link py-0" data-bs-dismiss="offcanvas" routerLinkActive="dashboard-active" routerLink="Resumen">Resumen</a>
+                        </li>
+                      </ul>
+                </div>
+    
+                <div class="mt-4">
+                    <h5 class="mx-3 mb-1"><i class="bi bi-person-fill"></i> Usuarios</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link py-0" data-bs-dismiss="offcanvas" routerLinkActive="dashboard-active" routerLink="MiPerfil">Mi Perfil</a>
+                        </li>
+                        <li class="nav-item" *ngIf="isRouteAvailable('AdministrarUsuarios')">
+                            <a class="nav-link py-0" data-bs-dismiss="offcanvas" routerLinkActive="dashboard-active" routerLink="AdministrarUsuarios" >Administrar Usuarios</a>
+                          </li>
+                      </ul>
+                </div>
+                
+                <div class="mt-4">
+                    <h5 class="mx-3 mb-1"><i class="bi bi-calendar-date-fill"></i> Reservas</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item" *ngIf="isRouteAvailable('RegistrarReservas')">
+                          <a class="nav-link py-0" data-bs-dismiss="offcanvas" routerLinkActive="dashboard-active" routerLink="RegistrarReservas">Registrar Reservas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link py-0" data-bs-dismiss="offcanvas" routerLinkActive="dashboard-active" routerLink="ConsultarReservas">Consultar Reservas</a>
+                          </li>
+                      </ul>
+                </div>
+    
+                <div class="mt-4">
+                    <h5 class="mx-3 mb-1"><i class="bi bi-person-badge-fill"></i> Clientes</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item" *ngIf="isRouteAvailable('RegistrarClientes')">
+                          <a class="nav-link py-0" data-bs-dismiss="offcanvas" routerLinkActive="dashboard-active" routerLink="RegistrarClientes">Registrar Clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link py-0" data-bs-dismiss="offcanvas" routerLinkActive="dashboard-active" routerLink="ConsultarClientes">Consultar Clientes</a>
+                          </li>
+                      </ul>
+                </div>
+    
+                <div class="mt-4">
+                    <h5 class="mx-3 mb-1"><i class="bi bi-door-closed-fill"></i> Habitaciones</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item" *ngIf="isRouteAvailable('RegistrarHabitaciones')">
+                          <a class="nav-link py-0" data-bs-dismiss="offcanvas" routerLinkActive="dashboard-active" routerLink="RegistrarHabitaciones">Registrar Habitaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link py-0" data-bs-dismiss="offcanvas" routerLinkActive="dashboard-active" routerLink="ConsultarHabitaciones">Consultar Habitaciones</a>
+                        </li>
+                        <li class="nav-item" *ngIf="isRouteAvailable('RegistrarHTipos')">
+                          <a class="nav-link py-0" data-bs-dismiss="offcanvas" routerLinkActive="dashboard-active" routerLink="RegistrarHTipos">Registrar Tipos de Habitaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link py-0" data-bs-dismiss="offcanvas" routerLinkActive="dashboard-active" routerLink="ConsultarHTipos">Consultar Tipos de Habitaciones</a>
+                        </li>
+                      </ul>
+                </div>
+
+                <div class="mt-4">
+                  <a class="dropdown-item" (click)="doLogout()"><i class="bi bi-door-open-fill"></i> Cerrar Sesión</a>
+                </div>
+            </div>
+
+          </div>
+    </div>
+
+</nav>
+
+<div id="dashboard-container" class="w-100 m-0 p-0 h-100">
+    <div class="row h-100 w-100 m-0">
+        <div class="col col-lg-2 bg-light d-none d-lg-block p-0">
+            <div id="dashboard-lg-menu" class="position-fixed">
+
+                <div class="mt-4">
+                    <h5 class="mx-3 mb-1"><i class="bi bi-speedometer"></i> Dashboard</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link py-0 text-wrap" routerLinkActive="dashboard-active" routerLink="Resumen">Resumen</a>
+                        </li>
+                      </ul>
+                </div>
+    
+                <div class="mt-4">
+                    <h5 class="mx-3 mb-1"><i class="bi bi-person-fill"></i> Usuarios</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link py-0 text-wrap" routerLinkActive="dashboard-active" routerLink="MiPerfil">Mi Perfil</a>
+                        </li>
+                        <li class="nav-item" *ngIf="isRouteAvailable('AdministrarUsuarios')">
+                            <a class="nav-link py-0 text-wrap" routerLinkActive="dashboard-active" routerLink="AdministrarUsuarios">Administrar Usuarios</a>
+                          </li>
+                      </ul>
+                </div>
+                
+                <div class="mt-4">
+                    <h5 class="mx-3 mb-1"><i class="bi bi-calendar-date-fill"></i> Reservas</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item" *ngIf="isRouteAvailable('RegistrarReservas')">
+                          <a class="nav-link py-0 text-wrap" routerLinkActive="dashboard-active" routerLink="RegistrarReservas">Registrar Reservas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link py-0 text-wrap" routerLinkActive="dashboard-active" routerLink="ConsultarReservas">Consultar Reservas</a>
+                          </li>
+                      </ul>
+                </div>
+    
+                <div class="mt-4">
+                    <h5 class="mx-3 mb-1"><i class="bi bi-person-badge-fill"></i> Clientes</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item" *ngIf="isRouteAvailable('RegistrarClientes')">
+                          <a class="nav-link py-0 text-wrap" routerLinkActive="dashboard-active" routerLink="RegistrarClientes">Registrar Clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link py-0 text-wrap" routerLinkActive="dashboard-active" routerLink="ConsultarClientes">Consultar Clientes</a>
+                          </li>
+                      </ul>
+                </div>
+    
+                <div class="mt-4">
+                    <h5 class="mx-3 mb-1"><i class="bi bi-door-closed-fill"></i> Habitaciones</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item" *ngIf="isRouteAvailable('RegistrarHabitaciones')">
+                          <a class="nav-link py-0 text-wrap" routerLinkActive="dashboard-active" routerLink="RegistrarHabitaciones">Registrar Habitaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link py-0 text-wrap" routerLinkActive="dashboard-active" routerLink="ConsultarHabitaciones">Consultar Habitaciones</a>
+                        </li>
+                        <li class="nav-item" *ngIf="isRouteAvailable('RegistrarHTipos')">
+                          <a class="nav-link py-0 text-wrap" routerLinkActive="dashboard-active" routerLink="RegistrarHTipos">Registrar Tipos de habitación</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link py-0 text-wrap" routerLinkActive="dashboard-active" routerLink="ConsultarHTipos">Consultar Tipos de habitación</a>
+                        </li>
+                      </ul>
+                </div>
+            </div>
+
+        </div>
+        <!-- Here goes every component of the dashboard -->
+        <div id="second-container" class="col p-0 col-lg-10 ">
+            <div id="component-container" class="">
+                <div id="component" class="m-3">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="row w-100 mx-0 mb-sm-3">
+    <div class="col-sm mb-3 mb-sm-0 d-flex justify-content-center">
+        <div class="w-75 m-0">
+            <img class="img-fluid" src="{{room.roomType[0].imageUrl}}" alt="">
+        </div>
+    </div>
+    <form novalidate [formGroup]="numPeopleForm" (ngSubmit)="addRoom()" class="col-sm mb-3 mb-sm-0">
+        <h2>Habitación {{room.roomType[0].roomSize}} {{room.roomType[0].roomCategory}}</h2>
+        <div>Precio: {{room.roomType[0].price | currency}} por persona<br>Capacidad Máxima: {{room.roomType[0].capacity}} personas</div>
+        <div>Características:<br>
+            <ul>
+                <li *ngFor="let amenity of amenities">{{amenity}}</li>
+            </ul>
+        </div>
+        <div class="w-100 d-flex justify-content-center">
+            <div class="row w-75 p-0">
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="numAdults" class="form-label">Adultos</label>
+                    <input formControlName="numAdults" type="number" class="form-control" id="numAdults" min="0" [max]="room.roomType[0].capacity - numPeopleForm.value['numChildren']" (change)="onNumPeopleChange()" placeholder="Adultos">
+                </div>
+                <div class="col-sm mb-3 mb-sm-0">
+                    <label for="numChildren" class="form-label">Niños</label>
+                    <input formControlName="numChildren" type="number" class="form-control" id="numChildren" min="0" [max]="room.roomType[0].capacity - numPeopleForm.value['numAdults']" (change)="onNumPeopleChange()" placeholder="Niños">
+                </div>
+            </div>
+        </div>
+        <div class="row w-100 mx-0 mb-sm-3 d-flex flex-column">
+                <div class="mb-3 mt-3 p-0 w-100 d-flex justify-content-center">
+                    <button type="submit">Agregar a la reserva</button>
+                </div>
+                <div class="p-0 w-100 d-flex justify-content-center">
+                    <a class="button" routerLink="/Reservar">Regresar</a>
+                </div>
+        </div>
+    </form>
+</div>

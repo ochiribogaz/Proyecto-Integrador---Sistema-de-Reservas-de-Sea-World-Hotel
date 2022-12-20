@@ -1,0 +1,51 @@
+extends layout
+
+block Content
+  // Wrapper
+  #wrapper
+    // Header
+    header#header
+      a.logo #{message?message:h1}
+    // Nav
+    nav#nav
+      ul.links
+        li(class=(h1 == 'Sea World Hotel' ? "active": undefined))
+          a(href='/inicio') Inicio
+        li(class=(h1 == 'Historia' ? "active": undefined))
+          a(href='/historia') Historia
+        li(class=(h1 == 'Galería' ? "active": undefined))
+          a(href='/galeria') Galería
+        li(class=(h1 == 'Reservar' ? "active": undefined))
+          a(href='/BookingAdmin/Reservar') Reserva Ahora
+      ul.icons
+        li
+          a.icon.brands.fa-facebook-f(href='https://www.facebook.com/seaworldhotel.ec' target='_blank')
+            span.label Facebook
+        li
+          a.icon.brands.fa-instagram(href='https://www.instagram.com/seaworldhotel.ec/' target='_blank')
+            span.label Instagram
+        li
+          a.icon.brands.fa-tiktok(href='https://www.tiktok.com/@seaworldhotel.ec' target='_blank')
+            span.label TikTok
+        li
+          a.icon.brands.fa-whatsapp(href='https://wa.me/+593961103332' target='_blank')
+            span.label Whatsapp
+    block Main
+  // Footer
+  footer#footer
+    section#social
+      div
+        h3 &copy; #{company} #{year}
+        ul#footerSocial.icons.alt
+          li
+            a.icon.brands.alt.fa-facebook-f(href='https://www.facebook.com/seaworldhotel.ec' target='_blank')
+              span.label Facebook
+          li
+            a.icon.brands.alt.fa-instagram(href='https://www.instagram.com/seaworldhotel.ec/' target='_blank')
+              span.label Instagram
+          li
+            a.icon.brands.alt.fa-tiktok(href='https://www.tiktok.com/@seaworldhotel.ec' target='_blank')
+              span.label TikTok
+          li
+            a.icon.brands.alt.fa-whatsapp(href='https://wa.me/+593961103332' target='_blank')
+              span.label Whatsapp

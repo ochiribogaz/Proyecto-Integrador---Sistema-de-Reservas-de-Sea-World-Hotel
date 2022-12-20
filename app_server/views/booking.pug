@@ -1,0 +1,21 @@
+extends template2
+
+append StyleSheets
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css' rel='stylesheet' type='text/css')
+  link(rel='stylesheet' href='/styles.459afecbee16a1e5.css')
+block Main
+  // Main
+  #main
+    section.post
+      header.major
+        span.date
+          img#logoSW(src='../images/logoSW.webp' alt='Sea World Hotel')
+        h1 Reserva ahora
+        p Has tu reserva ahora y disfruta de tus vacaciones de ensueño
+      app-framework
+      
+append Scripts
+  script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js')
+  script(src='/main.35106bfa4735e7c3.js')
+  script(src='/polyfills.3e6d9ddfb0be3ee7.js')
+  script(src='/runtime.c23cde8a7673b3f9.js')
