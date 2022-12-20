@@ -4,3 +4,4 @@ export const environment = {
   token: 'PayPhoneToken',
   codificationPassword: 'PayPhoneCodificationPassword'
 };
+
