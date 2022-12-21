@@ -32,6 +32,7 @@ o el comando
 nodemon
 ```
 Las aplicaciones correrán en el puerto 3000 del localhost.
+
 7. Para correr el sistema de administración de reservas, dentro de la carpeta "app_public" ejecutar el comando:
 ```
 ng serve
