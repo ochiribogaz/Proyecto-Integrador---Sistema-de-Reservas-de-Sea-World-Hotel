@@ -23,7 +23,8 @@ npm install
 cd app_public
 ```
 5. Para crear las colecciones en la base de datos descomentar el código que se encuentra en cada uno de los archivos de la carpeta "app_api/models" y realizar el paso 6. Posteriormente, se debe comentar este código nuevamente.
-6. Para ejecutar la aplicación realizada en Node.js y la API de REST, ejecutar el comando: ```
+6. Para ejecutar la aplicación realizada en Node.js y la API de REST, ejecutar el comando:
+```
 npm start
 ```
 o el comando
